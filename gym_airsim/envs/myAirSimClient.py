@@ -108,7 +108,7 @@ class myAirSimClient(MultirotorClient):
     
     def goal_direction(self, goal, pos):
         
-        pitch, roll, yaw  = self.getPitchRollYaw()
+        pitch, roll, yaw  = to_eularian_angles(self.simGetVehiclePose().orientation) # self.getPitchRollYaw()
         yaw = math.degrees(yaw) 
         
         pos_angle = math.atan2(goal[1] - pos.y_val, goal[0]- pos.x_val)
