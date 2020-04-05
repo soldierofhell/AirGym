@@ -81,7 +81,7 @@ class AirSimEnv(gym.Env):
 
         collided = airgym.take_action(action)
         
-        now = airgym.getPosition()
+        now = airgym.simGetVehiclePose().position #getPosition()
         track = airgym.goal_direction(self.goal, now) 
 
         if collided == True:
@@ -143,7 +143,7 @@ class AirSimEnv(gym.Env):
         
         print("")
         
-        now = airgym.getPosition()
+        now = airgym.simGetVehiclePose().position #getPosition()
         track = airgym.goal_direction(self.goal, now)
         self.state = airgym.getScreenDepthVis(track)
         
