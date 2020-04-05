@@ -26,9 +26,9 @@ class myAirSimClient(MultirotorClient):
         self.enableApiControl(True)
         self.armDisarm(True)
     
-        self.home_pos = self.getPosition()
+        self.home_pos = self.simGetVehiclePose().position #self.getPosition()
     
-        self.home_ori = self.getOrientation()
+        self.home_ori = self.simGetVehiclePose().orientation # self.getOrientation()
         
         self.z = -6
     
