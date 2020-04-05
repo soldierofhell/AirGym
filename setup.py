@@ -10,7 +10,7 @@ setup(
     license = "MIT",
     keywords = "reinforcement learning, AirSim, OpenAI GYM, Gym",
     url = "http://packages.python.org/an_example_pypi_project",
-    install_requires=['keras=2.0.6'],
+    install_requires=['keras=2.3.1'],
     extras_require={
           'gym': ['gym'],
       }
