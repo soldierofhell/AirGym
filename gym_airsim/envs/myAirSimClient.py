@@ -34,7 +34,7 @@ class myAirSimClient(MultirotorClient):
     
     def straight(self, duration, speed):
         #pitch, roll, yaw  = self.getPitchRollYaw()
-	pitch, roll, yaw  = to_eularian_angles(self.simGetVehiclePose().orientation)
+        pitch, roll, yaw  = to_eularian_angles(self.simGetVehiclePose().orientation)
         vx = math.cos(yaw) * speed
         vy = math.sin(yaw) * speed
         self.moveByVelocityZAsync(vx, vy, self.z, duration, DrivetrainType.ForwardOnly).join() # moveByVelocityZ
