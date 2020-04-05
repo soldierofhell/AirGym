@@ -168,7 +168,7 @@ class myAirSimClient(MultirotorClient):
         self.enableApiControl(True)
         self.armDisarm(True)
         time.sleep(1)
-        self.moveToZ(self.z, 3) 
+        self.moveToZAsync(self.z, 3).join() # moveToZ
         time.sleep(3)
         
     
