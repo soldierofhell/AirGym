@@ -12,7 +12,7 @@ import multiprocessing as mp
 
 #from AirSimClient import *
 
-from airsim import *
+from airsim import MultirotorClient, to_eularian_angles, DrivetrainType
 
 
 class myAirSimClient(MultirotorClient):
@@ -33,20 +33,21 @@ class myAirSimClient(MultirotorClient):
         self.z = -6
     
     def straight(self, duration, speed):
-        pitch, roll, yaw  = self.getPitchRollYaw()
+        #pitch, roll, yaw  = self.getPitchRollYaw()
+	pitch, roll, yaw  = to_eularian_angles(self.simGetVehiclePose().orientation)
         vx = math.cos(yaw) * speed
         vy = math.sin(yaw) * speed
-        self.moveByVelocityZ(vx, vy, self.z, duration, DrivetrainType.ForwardOnly)
+        self.moveByVelocityZAsync(vx, vy, self.z, duration, DrivetrainType.ForwardOnly).join() # moveByVelocityZ
         start = time.time()
         return start, duration
     
     def yaw_right(self, duration):
-        self.rotateByYawRate(30, duration)
+        self.rotateByYawRateAsync(30, duration).join() # rotateByYawRate
         start = time.time()
         return start, duration
     
     def yaw_left(self, duration):
-        self.rotateByYawRate(-30, duration)
+        self.rotateByYawRateAsync(-30, duration).join() # rotateByYawRate
         start = time.time()
         return start, duration
     
@@ -55,10 +56,10 @@ class myAirSimClient(MultirotorClient):
 		
         #check if copter is on level cause sometimes he goes up without a reason
         x = 0
-        while self.getPosition().z_val < -7.0:
-            self.moveToZ(-6, 3)
+        while self.simGetVehiclePose().position.z_val < -7.0: # self.getPosition()
+            self.moveToZAsync(-6, 3).join() # moveToZ
             time.sleep(1)
-            print(self.getPosition().z_val, "and", x)
+            print(self.simGetVehiclePose().position.z_val, "and", x) # self.getPosition()
             x = x + 1
             if x > 10:
                 return True        
@@ -74,11 +75,11 @@ class myAirSimClient(MultirotorClient):
             start, duration = self.straight(1, 4)
         
             while duration > time.time() - start:
-                if self.getCollisionInfo().has_collided == True:
+                if self.simGetCollisionInfo().has_collided == True: # getCollisionInfo()
                     return True    
                 
-            self.moveByVelocity(0, 0, 0, 1)
-            self.rotateByYawRate(0, 1)
+            self.moveByVelocityAsync(0, 0, 0, 1).join() # moveByVelocity
+            self.rotateByYawRateAsync(0, 1).join() # rotateByYawRate
             
             
         if action == 1:
@@ -89,8 +90,8 @@ class myAirSimClient(MultirotorClient):
                 if self.getCollisionInfo().has_collided == True:
                     return True
             
-            self.moveByVelocity(0, 0, 0, 1)
-            self.rotateByYawRate(0, 1)
+            self.moveByVelocityAsync(0, 0, 0, 1).join() # moveByVelocity
+            self.rotateByYawRateAsync(0, 1).join() # rotateByYawRate
             
         if action == 2:
             
@@ -100,8 +101,8 @@ class myAirSimClient(MultirotorClient):
                 if self.getCollisionInfo().has_collided == True:
                     return True
                 
-            self.moveByVelocity(0, 0, 0, 1)
-            self.rotateByYawRate(0, 1)
+            self.moveByVelocityAsync(0, 0, 0, 1).join() # moveByVelocity
+            self.rotateByYawRateAsync(0, 1).join() # rotateByYawRate
             
         return collided
     
