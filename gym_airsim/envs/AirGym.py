@@ -10,7 +10,7 @@ from gym.spaces.box import Box
 
 from gym_airsim.envs.myAirSimClient import *
         
-from AirSimClient import *
+#from airsim import 
 
 logger = logging.getLogger(__name__)
 
