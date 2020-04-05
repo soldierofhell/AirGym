@@ -2,7 +2,7 @@ import numpy as np
 import time
 import math
 import cv2
-from pylab import array, arange, uint8 
+#from pylab import array, arange, uint8 
 from PIL import Image
 import eventlet
 from eventlet import Timeout
@@ -131,7 +131,7 @@ class myAirSimClient(MultirotorClient):
         
         # Decrease intensity such that dark pixels become much darker, bright pixels become slightly dark 
         newImage1 = (maxIntensity)*(image/maxIntensity)**factor
-        newImage1 = array(newImage1,dtype=uint8)
+        newImage1 = np.array(newImage1,dtype=np.uint8)
         
         
         small = cv2.resize(newImage1, (0,0), fx=0.39, fy=0.38)
