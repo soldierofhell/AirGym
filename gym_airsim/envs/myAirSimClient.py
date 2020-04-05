@@ -10,7 +10,9 @@ import multiprocessing as mp
 # Change the path below to point to the directoy where you installed the AirSim PythonClient
 #sys.path.append('C:/Users/Kjell/Google Drive/MASTER-THESIS/AirSimpy')
 
-from AirSimClient import *
+#from AirSimClient import *
+
+from airsim import *
 
 
 class myAirSimClient(MultirotorClient):
