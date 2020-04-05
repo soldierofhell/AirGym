@@ -87,7 +87,7 @@ class myAirSimClient(MultirotorClient):
             start, duration = self.yaw_right(0.8)
             
             while duration > time.time() - start:
-                if self.getCollisionInfo().has_collided == True:
+                if self.simGetCollisionInfo().has_collided == True: # getCollisionInfo()
                     return True
             
             self.moveByVelocityAsync(0, 0, 0, 1).join() # moveByVelocity
@@ -98,7 +98,7 @@ class myAirSimClient(MultirotorClient):
             start, duration = self.yaw_left(1)
             
             while duration > time.time() - start:
-                if self.getCollisionInfo().has_collided == True:
+                if self.simGetCollisionInfo().has_collided == True: # getCollisionInfo()
                     return True
                 
             self.moveByVelocityAsync(0, 0, 0, 1).join() # moveByVelocity
