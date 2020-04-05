@@ -12,7 +12,7 @@ import multiprocessing as mp
 
 #from AirSimClient import *
 
-from airsim import MultirotorClient, to_eularian_angles, DrivetrainType
+from airsim import MultirotorClient, to_eularian_angles, DrivetrainType, ImageRequest, ImageType
 
 
 class myAirSimClient(MultirotorClient):
@@ -121,7 +121,7 @@ class myAirSimClient(MultirotorClient):
     
     def getScreenDepthVis(self, track):
 
-        responses = self.simGetImages([ImageRequest(0, AirSimImageType.DepthPerspective, True, False)])
+        responses = self.simGetImages([ImageRequest(0, ImageType.DepthPerspective, True, False)])
         img1d = np.array(responses[0].image_data_float, dtype=np.float)
         img1d = 255/np.maximum(np.ones(img1d.size), img1d)
         img2d = np.reshape(img1d, (responses[0].height, responses[0].width))
