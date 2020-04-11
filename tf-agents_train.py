@@ -13,7 +13,7 @@ import gym_airsim
 
 import argparse
 
-from PIL import Image
+#from PIL import Image
 
 import tensorflow as tf
 tf.compat.v1.enable_v2_behavior()
@@ -43,4 +43,4 @@ WINDOW_LENGTH = 1
 # Next, we build our model. We use the same model that was described by Mnih et al. (2015).
 input_shape = (WINDOW_LENGTH,) + INPUT_SHAPE
 
-environment = suite_gym.load('CartPole-v0')
+environment = suite_gym.load(args.env_name)
