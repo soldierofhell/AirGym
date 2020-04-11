@@ -73,7 +73,7 @@ class AirSimEnv(gym.Env):
         return r, distance_now
 		
     
-    def _step(self, action):
+    def step(self, action):
         assert self.action_space.contains(action), "%r (%s) invalid"%(action, type(action))
         
         self.addToLog('action', action)
@@ -125,7 +125,7 @@ class AirSimEnv(gym.Env):
             self.allLogs[key] = []
         self.allLogs[key].append(value)
         
-    def _reset(self):
+    def reset(self):
         """
         Resets the state of the environment and returns an initial observation.
         
