@@ -80,7 +80,7 @@ eval_py_env = suite_gym.load(args.env_name)
 train_env = tf_py_environment.TFPyEnvironment(train_py_env)
 eval_env = tf_py_environment.TFPyEnvironment(eval_py_env)
 
-
+fc_layer_params = (100,)
 
 q_net = q_network.QNetwork(
     train_env.observation_spec(),
