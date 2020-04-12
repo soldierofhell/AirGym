@@ -154,8 +154,8 @@ class myAirSimClient(MultirotorClient):
             info_section[:,info_section.shape[1]-3:info_section.shape[1]]  = 0
             
         total = np.concatenate((info_section, cut), axis=0)
-	total = total[:,None]
-	print('shape: ', total.shape)
+        total = total[:,None]
+        print('shape: ', total.shape)
         #total = np.stack(total[None,:]
             
         #cv2.imshow("Test", total)
