@@ -43,12 +43,12 @@ parser.add_argument('--env-name', type=str, default='AirSimEnv-v42')
 parser.add_argument('--weights', type=str, default=None)
 args = parser.parse_args()
 
-environment = suite_gym.load(args.env_name)
-print('action_spec:', environment.action_spec())
-print('time_step_spec.observation:', environment.time_step_spec().observation)
-print('time_step_spec.step_type:', environment.time_step_spec().step_type)
-print('time_step_spec.discount:', environment.time_step_spec().discount)
-print('time_step_spec.reward:', environment.time_step_spec().reward)
+#environment = suite_gym.load(args.env_name)
+#print('action_spec:', environment.action_spec())
+#print('time_step_spec.observation:', environment.time_step_spec().observation)
+#print('time_step_spec.step_type:', environment.time_step_spec().step_type)
+#print('time_step_spec.discount:', environment.time_step_spec().discount)
+#print('time_step_spec.reward:', environment.time_step_spec().reward)
 
 #action = np.array(1, dtype=np.int32)
 #time_step = environment.reset()
@@ -56,6 +56,31 @@ print('time_step_spec.reward:', environment.time_step_spec().reward)
 #while not time_step.is_last():
 # time_step = environment.step(action)
 #  print(time_step)
+
+
+
+num_iterations = 20000 # @param {type:"integer"}
+
+initial_collect_steps = 1000  # @param {type:"integer"} 
+collect_steps_per_iteration = 1  # @param {type:"integer"}
+replay_buffer_max_length = 100000  # @param {type:"integer"}
+
+batch_size = 64  # @param {type:"integer"}
+learning_rate = 1e-3  # @param {type:"number"}
+log_interval = 200  # @param {type:"integer"}
+
+num_eval_episodes = 10  # @param {type:"integer"}
+eval_interval = 1000  # @param {type:"integer"}
+
+
+train_py_env = suite_gym.load(args.env_name)
+eval_py_env = suite_gym.load(args.env_name)
+
+
+train_env = tf_py_environment.TFPyEnvironment(train_py_env)
+eval_env = tf_py_environment.TFPyEnvironment(eval_py_env)
+
+
 
 q_net = q_network.QNetwork(
     train_env.observation_spec(),
