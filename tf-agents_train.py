@@ -76,15 +76,16 @@ eval_interval = 1000  # @param {type:"integer"}
 train_py_env = suite_gym.load(args.env_name)
 eval_py_env = suite_gym.load(args.env_name)
 
-
 train_env = tf_py_environment.TFPyEnvironment(train_py_env)
 eval_env = tf_py_environment.TFPyEnvironment(eval_py_env)
 
-fc_layer_params = (100,)
+conv_layer_params=[(32, 4, 4), (64, 3, 2), (64, 1, 1)]
+fc_layer_params = (128,) # 512
 
 q_net = q_network.QNetwork(
     train_env.observation_spec(),
     train_env.action_spec(),
+    conv_layer_params=conv_layer_params,
     fc_layer_params=fc_layer_params)
 
 optimizer = tf.compat.v1.train.AdamOptimizer(learning_rate=learning_rate)
