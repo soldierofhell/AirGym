@@ -108,6 +108,9 @@ agent.initialize()
 eval_policy = agent.policy
 collect_policy = agent.collect_policy
 
+random_policy = random_tf_policy.RandomTFPolicy(train_env.time_step_spec(),
+                                                train_env.action_spec())
+
 def compute_avg_return(environment, policy, num_episodes=10):
 
   total_return = 0.0
@@ -142,6 +145,8 @@ def collect_step(environment, policy, buffer):
 def collect_data(env, policy, buffer, steps):
   for _ in range(steps):
     collect_step(env, policy, buffer)
+    
+collect_data(train_env, random_policy, replay_buffer, steps=100)
 
 dataset = replay_buffer.as_dataset(
     num_parallel_calls=3, 
