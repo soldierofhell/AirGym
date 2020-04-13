@@ -78,8 +78,8 @@ class myAirSimClient(MultirotorClient):
                 if self.simGetCollisionInfo().has_collided == True: # getCollisionInfo()
                     return True    
                 
-            self.moveByVelocityAsync(0, 0, 0, 1).join() # moveByVelocity
-            self.rotateByYawRateAsync(0, 1).join() # rotateByYawRate
+            #self.moveByVelocityAsync(0, 0, 0, 1).join() # moveByVelocity
+            #self.rotateByYawRateAsync(0, 1).join() # rotateByYawRate
             
             
         if action == 1:
@@ -90,8 +90,8 @@ class myAirSimClient(MultirotorClient):
                 if self.simGetCollisionInfo().has_collided == True: # getCollisionInfo()
                     return True
             
-            self.moveByVelocityAsync(0, 0, 0, 1).join() # moveByVelocity
-            self.rotateByYawRateAsync(0, 1).join() # rotateByYawRate
+            #self.moveByVelocityAsync(0, 0, 0, 1).join() # moveByVelocity
+            #self.rotateByYawRateAsync(0, 1).join() # rotateByYawRate
             
         if action == 2:
             
@@ -101,8 +101,8 @@ class myAirSimClient(MultirotorClient):
                 if self.simGetCollisionInfo().has_collided == True: # getCollisionInfo()
                     return True
                 
-            self.moveByVelocityAsync(0, 0, 0, 1).join() # moveByVelocity
-            self.rotateByYawRateAsync(0, 1).join() # rotateByYawRate
+            #self.moveByVelocityAsync(0, 0, 0, 1).join() # moveByVelocity
+            #self.rotateByYawRateAsync(0, 1).join() # rotateByYawRate
             
         return collided
     
