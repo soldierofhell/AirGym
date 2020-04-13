@@ -22,7 +22,7 @@ class AirSimEnv(gym.Env):
         
     def __init__(self):
         # left depth, center depth, right depth, yaw
-        self.observation_space = spaces.Box(low=0, high=255, shape=(30, 100))
+        self.observation_space = spaces.Box(low=0, high=255, shape=(30, 100, 1))
         self.state = np.zeros((30, 100,1), dtype=np.uint8)  
         
         self.action_space = spaces.Discrete(3)
