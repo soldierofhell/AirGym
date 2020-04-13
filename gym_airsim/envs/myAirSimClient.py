@@ -55,14 +55,14 @@ class myAirSimClient(MultirotorClient):
     def take_action(self, action):
 		
         #check if copter is on level cause sometimes he goes up without a reason
-        x = 0
-        while self.simGetVehiclePose().position.z_val < -7.0: # self.getPosition()
-            self.moveToZAsync(-6, 3).join() # moveToZ
-            time.sleep(1)
-            print(self.simGetVehiclePose().position.z_val, "and", x) # self.getPosition()
-            x = x + 1
-            if x > 10:
-                return True        
+        #x = 0
+        #while self.simGetVehiclePose().position.z_val < -7.0: # self.getPosition()
+        #    self.moveToZAsync(-6, 3).join() # moveToZ
+        #    time.sleep(1)
+        #    print(self.simGetVehiclePose().position.z_val, "and", x) # self.getPosition()
+        #    x = x + 1
+        #    if x > 10:
+        #        return True        
         
     
         start = time.time()
