@@ -155,7 +155,7 @@ class myAirSimClient(MultirotorClient):
             
         total = np.concatenate((info_section, cut), axis=0)
         cv2.imwrite('test.jpg', total)
-        total = total[:,None]
+        total = total[:,:,None]
         #print('shape: ', total.shape)
         #total = np.stack([total, total], axis=2)
             
