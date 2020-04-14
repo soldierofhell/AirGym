@@ -20,20 +20,18 @@ from pymavlink.mavutil import location
 
 class AirGymSITLRL():
     def __init__(self, ):
-        self._launch_sitl()        
+        self._launch_sitl()
+        
+        rospy.init_node("ArducopterRL", anonymous=True)
     
     def _launch_apm(self):
         sim_vehicle_sh = str(os.environ["ARDUPILOT_PATH"]) + "/Tools/autotest/sim_vehicle.sh"
         subprocess.Popen(["xterm","-e",sim_vehicle_sh,"-j4","-f","quad","-v","ArduCopter"])    
     
-    def run(self):
+    def step(self, action):
+        raise NotImplementedError
+
+    def reset(self):
+        raise NotImplementedError
 
 
-if __name__ == '__main__':
-    rospy.init_node("ArducopterRL", anonymous=True)
-    print("Welcome")
-    patroler = ArducopterRL()
-    try:
-        ArducopterRL.run()
-    except rospy.ROSInterruptException:
-        pass
