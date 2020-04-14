@@ -16,7 +16,7 @@ import random
 from pymavlink import mavutil
 from pymavlink.mavutil import location
 
-# environment variables: ARDUPILOT_PATH
+# environment variables: ARDUPILOT_PATH, AIRSIM_PATH
 
 class AirGymSITLRL():
     def __init__(self, ):
@@ -24,9 +24,13 @@ class AirGymSITLRL():
         
         rospy.init_node("ArducopterRL", anonymous=True)
     
-    def _launch_apm(self):
-        sim_vehicle_sh = str(os.environ["ARDUPILOT_PATH"]) + "/Tools/autotest/sim_vehicle.sh"
-        subprocess.Popen(["xterm","-e",sim_vehicle_sh,"-j4","-f","quad","-v","ArduCopter"])    
+    def _launch_sitl(self):
+        sitl_sh = str(os.environ["ARDUPILOT_PATH"]) + "/Tools/autotest/sim_vehicle.sh"
+        subprocess.Popen(["xterm","-e",sitl_sh,"-j4","-f","quad","-v","ArduCopter"])
+        
+    def _launch_airsim(self):
+        airsim_sh = str(os.environ["AIRSIM_PATH"]) + "/Unreal/Environments/Neighborhood/AirSimNH.sh"
+        subprocess.Popen(["xterm","-e",airsim_sh])  
     
     def step(self, action):
         raise NotImplementedError
