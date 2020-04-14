@@ -16,8 +16,15 @@ import random
 from pymavlink import mavutil
 from pymavlink.mavutil import location
 
-class ArducopterRL():
+# environment variables: ARDUPILOT_PATH
+
+class AirGymSITLRL():
     def __init__(self, ):
+        self._launch_sitl()        
+    
+    def _launch_apm(self):
+        sim_vehicle_sh = str(os.environ["ARDUPILOT_PATH"]) + "/Tools/autotest/sim_vehicle.sh"
+        subprocess.Popen(["xterm","-e",sim_vehicle_sh,"-j4","-f","quad","-v","ArduCopter"])    
     
     def run(self):
 
